@@ -1,11 +1,11 @@
-kata: RomanNumeral.o TestRunner.o RomanNumeralTest.o
-	g++ -g -o kata RomanNumeral.o TestRunner.o RomanNumeralTest.o
+CC=gcc
+CFLAGS=-I. -Wall
 
-RomanNumeral.o: RomanNumeral.cpp RomanNumeral.hpp
-	g++ -g -c -std=c++11 -I/sw/include/root RomanNumeral.cpp
+kata: RomanNumeral.o RomanNumeralTest.o
+	$(CC) -o kata RomanNumeral.o RomanNumeralTest.o -lcheck -lm -pthread -lrt
 
-TestRunner.o: catch.hpp RomanNumeral.hpp TestRunner.cpp
-	g++ -g -c -std=c++11 -I/sw/include/root TestRunner.cpp
+RomanNumeral.o: RomanNumeral.c RomanNumeral.h
+	$(CC) $(CFLAGS) -c RomanNumeral.c
 
-RomanNumeralTest.o: catch.hpp RomanNumeralTest.cpp RomanNumeral.hpp
-	g++ -g -c -std=c++11 -I/sw/include/root RomanNumeralTest.cpp 
+RomanNumeralTest.o: RomanNumeral.h RomanNumeralTest.c
+	$(CC) $(CFLAGS) -c RomanNumeralTest.c 
