@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "RomanNumeral.h"
 
-#define CK_FORK "no"
-
 START_TEST(RomanToDecimal_I_Returns1)
 {
 	// setup
@@ -28,6 +26,30 @@ START_TEST(RomanToDecimal_II_Returns2)
 }
 END_TEST
 
+START_TEST(RomanToDecimal_III_Returns3)
+{
+	// setup
+	
+	// function under test 
+	int result = RomanToDecimal("III");	
+
+	// assertions
+    ck_assert_int_eq(result, 3);
+}
+END_TEST
+
+START_TEST(RomanToDecimal_IV_Returns4)
+{
+	// setup
+	
+	// function under test 
+	int result = RomanToDecimal("IV");	
+
+	// assertions
+    ck_assert_int_eq(result, 4);
+}
+END_TEST
+
 Suite * roman_numeral_suite(void)
 {
     Suite *s;
@@ -37,6 +59,8 @@ Suite * roman_numeral_suite(void)
     tc_core = tcase_create("Core");
     tcase_add_test(tc_core, RomanToDecimal_I_Returns1);
     tcase_add_test(tc_core, RomanToDecimal_II_Returns2);
+    tcase_add_test(tc_core, RomanToDecimal_III_Returns3);
+    tcase_add_test(tc_core, RomanToDecimal_IV_Returns4);
     suite_add_tcase(s, tc_core);
 
     return s;

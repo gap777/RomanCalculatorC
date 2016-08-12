@@ -1,5 +1,5 @@
-CC=gcc
-CFLAGS=-I. -Wall
+CC=gcc 
+CFLAGS=-I. -Wall -std=c99
 
 kata: RomanNumeral.o RomanNumeralTest.o
 	$(CC) -o kata RomanNumeral.o RomanNumeralTest.o -lcheck -lm -pthread -lrt
