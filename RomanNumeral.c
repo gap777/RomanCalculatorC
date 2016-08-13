@@ -2,6 +2,46 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define NumberOfIllegalCombinations 6
+const char * IllegalCombinations[NumberOfIllegalCombinations] = {
+	"DCCCC",
+	"CCCC",
+	"LXXXX",
+	"XXXX",
+	"VIIII",
+	"IIII",
+};
+
+const char * GetIllegalCombinationReplacement(const char * illegalCombination)
+{
+	const char * replacement = NULL;
+	if (strcmp(illegalCombination, "DCCCC") == 0)
+	{
+		replacement = "CM";
+	}
+	else if (strcmp(illegalCombination, "CCCC") == 0)
+	{
+		replacement = "CD";
+	}
+	else if (strcmp(illegalCombination, "LXXXX") == 0)
+	{
+		replacement = "XC";
+	}
+	else if (strcmp(illegalCombination, "XXXX") == 0)
+	{
+		replacement = "XL";
+	}
+	else if (strcmp(illegalCombination, "VIIII") == 0)
+	{
+		replacement = "IX";
+	}
+	else if (strcmp(illegalCombination, "IIII") == 0)
+	{
+		replacement = "IV";
+	}
+	return replacement;
+}
+
 int GetSymbolValue(char symbol)
 {
 	int value = 0;
@@ -67,7 +107,25 @@ char FindSymbolLessThanOrEqualTo(int aValue)
 	return symbol;
 }
 
-const char * DecimalToRoman(int decimal)
+void ReplaceIllegalCombinations(char * expr)
+{
+	char * nextSubstr = NULL;
+	for (int comboIndex = 0; comboIndex < NumberOfIllegalCombinations; comboIndex++)
+	{
+	 	const char * illegalExpr = IllegalCombinations[comboIndex];
+		while ((nextSubstr = strstr(expr, illegalExpr)) != NULL)
+		{
+			int illegalComboLength = strlen(illegalExpr);
+			const char * replacement = GetIllegalCombinationReplacement(illegalExpr);
+			int replacementLength = strlen(replacement);
+
+			strncpy(nextSubstr, replacement, replacementLength);
+			strcpy(nextSubstr + replacementLength, nextSubstr + illegalComboLength); 
+		}	
+	}
+}
+
+char * DecimalToRoman(int decimal)
 {
 	int remainder = decimal;
 	char symbol = '\0';
@@ -83,6 +141,7 @@ const char * DecimalToRoman(int decimal)
 		remainder -= symbolicValue;
 	}
 	romanNumeralExpr[index] = '\0';
+	ReplaceIllegalCombinations(romanNumeralExpr);
 	return romanNumeralExpr;
 }
 

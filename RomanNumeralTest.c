@@ -100,7 +100,7 @@ START_TEST(DecimalToRoman_1_ReturnsI)
 	// setup
 
 	// method under test
-	const char * result = DecimalToRoman(1);
+	char * result = DecimalToRoman(1);
 
 	// assertions
 	ck_assert_str_eq (result, "I");
@@ -112,7 +112,7 @@ START_TEST(DecimalToRoman_2_ReturnsII)
 	// setup
 
 	// method under test
-	const char * result = DecimalToRoman(2);
+	char * result = DecimalToRoman(2);
 
 	// assertions
 	ck_assert_str_eq (result, "II");
@@ -124,7 +124,7 @@ START_TEST(DecimalToRoman_3_ReturnsIII)
 	// setup
 
 	// method under test
-	const char * result = DecimalToRoman(3);
+	char * result = DecimalToRoman(3);
 
 	// assertions
 	ck_assert_str_eq (result, "III");
@@ -136,7 +136,7 @@ START_TEST(DecimalToRoman_4_ReturnsIV)
 	// setup
 
 	// method under test
-	const char * result = DecimalToRoman(4);
+	char * result = DecimalToRoman(4);
 
 	// assertions
 	ck_assert_str_eq (result, "IV");
@@ -148,7 +148,7 @@ START_TEST(DecimalToRoman_69_ReturnsLXIX)
 	// setup
 
 	// method under test
-	const char * result = DecimalToRoman(69);
+	char * result = DecimalToRoman(69);
 
 	// assertions
 	ck_assert_str_eq (result, "LXIX");
@@ -160,7 +160,7 @@ START_TEST(DecimalToRoman_1226_ReturnsMCCXXVI)
 	// setup
 
 	// method under test
-	const char * result = DecimalToRoman(1226);
+	char * result = DecimalToRoman(1226);
 
 	// assertions
 	ck_assert_str_eq (result, "MCCXXVI");
