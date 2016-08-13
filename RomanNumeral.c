@@ -2,6 +2,17 @@
 #include <string.h>
 #include <stdlib.h>
 
+/** 
+ * The algorithm I use to convert a decimal to a roman numeral 
+ * is to look for the biggest single roman symbol that is included
+ * in the number, subtract the value thereof, and repeat, concatenating
+ * the symbols as they are selected.
+ *
+ * The problem with this approach is that it leaves you with illegal
+ * combinations (see below). Thus, as a post-processing step, I replace
+ * any instances of those symbol combinations with their correct form.
+ */
+
 #define NumberOfIllegalCombinations 6
 const char * IllegalCombinations[NumberOfIllegalCombinations] = {
 	"DCCCC",
@@ -107,21 +118,25 @@ char FindSymbolLessThanOrEqualTo(int aValue)
 	return symbol;
 }
 
-void ReplaceIllegalCombinations(char * expr)
+void ReplaceAll(char * expr, const char * illegalExpr)
 {
 	char * nextSubstr = NULL;
+	while ((nextSubstr = strstr(expr, illegalExpr)) != NULL)
+	{
+		int illegalComboLength = strlen(illegalExpr);
+		const char * replacement = GetIllegalCombinationReplacement(illegalExpr);
+		int replacementLength = strlen(replacement);
+
+		strncpy(nextSubstr, replacement, replacementLength);
+		strcpy(nextSubstr + replacementLength, nextSubstr + illegalComboLength); 
+	}
+}
+
+void ReplaceIllegalCombinations(char * expr)
+{
 	for (int comboIndex = 0; comboIndex < NumberOfIllegalCombinations; comboIndex++)
 	{
-	 	const char * illegalExpr = IllegalCombinations[comboIndex];
-		while ((nextSubstr = strstr(expr, illegalExpr)) != NULL)
-		{
-			int illegalComboLength = strlen(illegalExpr);
-			const char * replacement = GetIllegalCombinationReplacement(illegalExpr);
-			int replacementLength = strlen(replacement);
-
-			strncpy(nextSubstr, replacement, replacementLength);
-			strcpy(nextSubstr + replacementLength, nextSubstr + illegalComboLength); 
-		}	
+		ReplaceAll(expr, IllegalCombinations[comboIndex]);	
 	}
 }
 
