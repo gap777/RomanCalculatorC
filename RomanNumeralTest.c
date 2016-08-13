@@ -50,6 +50,123 @@ START_TEST(RomanToDecimal_IV_Returns4)
 }
 END_TEST
 
+START_TEST(RomanToDecimal_V_Returns5)
+{
+	// setup
+	
+	// function under test 
+	int result = RomanToDecimal("V");	
+
+	// assertions
+    ck_assert_int_eq(result, 5);
+}
+END_TEST
+
+START_TEST(RomanToDecimal_MCCXXVI_Returns1226)
+
+	// setup
+
+	// method under test
+	int result = RomanToDecimal("MCCXXVI");
+
+	// assertions
+	ck_assert_int_eq(result, 1226);
+}
+
+START_TEST(RomanToDecimal_LXVIIII_Returns69)
+
+	// setup
+
+	// method under test
+	int result = RomanToDecimal("LXVIIII");
+
+	// assertions
+	ck_assert_int_eq(result, 69);
+}
+
+START_TEST(RomanToDecimal_LXIX_Returns69)
+
+	// setup
+
+	// method under test
+	int result = RomanToDecimal("LXIX");
+
+	// assertions
+	ck_assert_int_eq(result, 69);
+}
+
+START_TEST(DecimalToRoman_1_ReturnsI)
+
+	// setup
+
+	// method under test
+	const char * result = DecimalToRoman(1);
+
+	// assertions
+	ck_assert_str_eq (result, "I");
+	free(result);
+}
+
+START_TEST(DecimalToRoman_2_ReturnsII)
+
+	// setup
+
+	// method under test
+	const char * result = DecimalToRoman(2);
+
+	// assertions
+	ck_assert_str_eq (result, "II");
+	free(result);
+}
+
+START_TEST(DecimalToRoman_3_ReturnsIII)
+
+	// setup
+
+	// method under test
+	const char * result = DecimalToRoman(3);
+
+	// assertions
+	ck_assert_str_eq (result, "III");
+	free(result);
+}
+
+START_TEST(DecimalToRoman_4_ReturnsIV)
+
+	// setup
+
+	// method under test
+	const char * result = DecimalToRoman(4);
+
+	// assertions
+	ck_assert_str_eq (result, "IV");
+	free(result);
+}
+
+START_TEST(DecimalToRoman_69_ReturnsLXIX)
+
+	// setup
+
+	// method under test
+	const char * result = DecimalToRoman(69);
+
+	// assertions
+	ck_assert_str_eq (result, "LXIX");
+	free(result);
+}
+
+START_TEST(DecimalToRoman_1226_ReturnsMCCXXVI)
+
+	// setup
+
+	// method under test
+	const char * result = DecimalToRoman(1226);
+
+	// assertions
+	ck_assert_str_eq (result, "MCCXXVI");
+	free(result);
+}
+
 Suite * roman_numeral_suite(void)
 {
     Suite *s;
@@ -61,6 +178,16 @@ Suite * roman_numeral_suite(void)
     tcase_add_test(tc_core, RomanToDecimal_II_Returns2);
     tcase_add_test(tc_core, RomanToDecimal_III_Returns3);
     tcase_add_test(tc_core, RomanToDecimal_IV_Returns4);
+    tcase_add_test(tc_core, RomanToDecimal_V_Returns5);
+    tcase_add_test(tc_core, RomanToDecimal_MCCXXVI_Returns1226);
+    tcase_add_test(tc_core, RomanToDecimal_LXVIIII_Returns69);
+    tcase_add_test(tc_core, RomanToDecimal_LXIX_Returns69);
+    tcase_add_test(tc_core, DecimalToRoman_1_ReturnsI);
+    tcase_add_test(tc_core, DecimalToRoman_2_ReturnsII);
+    tcase_add_test(tc_core, DecimalToRoman_3_ReturnsIII);
+    tcase_add_test(tc_core, DecimalToRoman_4_ReturnsIV);
+    tcase_add_test(tc_core, DecimalToRoman_69_ReturnsLXIX);
+    tcase_add_test(tc_core, DecimalToRoman_1226_ReturnsMCCXXVI);
     suite_add_tcase(s, tc_core);
 
     return s;
