@@ -166,3 +166,18 @@ int RomanToDecimal(const char * romanNumeralExpr)
 
 	return total;
 }
+
+char * RomanAdd(const char * firstRomanAddend, const char * secondRomanAddend)
+{
+	int firstDecimalAddend = RomanToDecimal(firstRomanAddend);
+	int secondDecimalAddend = RomanToDecimal(secondRomanAddend);
+	return DecimalToRoman(firstDecimalAddend + secondDecimalAddend);
+}
+
+char * RomanSubtract(const char * romanMinuend, const char * romanSubtrahend)
+{
+	int decimalMinuend = RomanToDecimal(romanMinuend);
+	int decimalSubtrahend = RomanToDecimal(romanSubtrahend);
+	return DecimalToRoman(decimalMinuend - decimalSubtrahend);
+}
+

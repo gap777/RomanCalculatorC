@@ -167,6 +167,54 @@ START_TEST(DecimalToRoman_1226_ReturnsMCCXXVI)
 	free(result);
 }
 
+START_TEST(RomanAdd_1Plus1_Returns2)
+
+	// setup
+
+	// method under test
+	char * result = RomanAdd("I", "I");
+
+	// assertions
+	ck_assert_str_eq (result, "II");
+	free(result);
+}
+
+START_TEST(RomanAdd_1Plus2_Returns3)
+
+	// setup
+
+	// method under test
+	char * result = RomanAdd("I", "II");
+
+	// assertions
+	ck_assert_str_eq (result, "III");
+	free(result);
+}
+
+START_TEST(RomanAdd_1Plus3_Returns4)
+
+	// setup
+
+	// method under test
+	char * result = RomanAdd("I", "III");
+
+	// assertions
+	ck_assert_str_eq (result, "IV");
+	free(result);
+}
+
+START_TEST(RomanSubtract_4Minus1_Returns3)
+
+	// setup
+
+	// method under test
+	char * result = RomanSubtract("IV", "III");
+
+	// assertions
+	ck_assert_str_eq (result, "I");
+	free(result);
+}
+
 Suite * roman_numeral_suite(void)
 {
     Suite *s;
@@ -188,6 +236,10 @@ Suite * roman_numeral_suite(void)
     tcase_add_test(tc_core, DecimalToRoman_4_ReturnsIV);
     tcase_add_test(tc_core, DecimalToRoman_69_ReturnsLXIX);
     tcase_add_test(tc_core, DecimalToRoman_1226_ReturnsMCCXXVI);
+    tcase_add_test(tc_core, RomanAdd_1Plus1_Returns2);
+    tcase_add_test(tc_core, RomanAdd_1Plus2_Returns3);
+    tcase_add_test(tc_core, RomanAdd_1Plus3_Returns4);
+    tcase_add_test(tc_core, RomanSubtract_4Minus1_Returns3);
     suite_add_tcase(s, tc_core);
 
     return s;
