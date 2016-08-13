@@ -118,17 +118,16 @@ char FindSymbolLessThanOrEqualTo(int aValue)
 	return symbol;
 }
 
-void ReplaceAll(char * expr, const char * illegalExpr)
+void ReplaceAll(char * expr, const char * search, const char * replacement)
 {
 	char * nextSubstr = NULL;
-	while ((nextSubstr = strstr(expr, illegalExpr)) != NULL)
+	while ((nextSubstr = strstr(expr, search)) != NULL)
 	{
-		int illegalComboLength = strlen(illegalExpr);
-		const char * replacement = GetIllegalCombinationReplacement(illegalExpr);
+		int searchLength = strlen(search);
 		int replacementLength = strlen(replacement);
 
 		strncpy(nextSubstr, replacement, replacementLength);
-		strcpy(nextSubstr + replacementLength, nextSubstr + illegalComboLength); 
+		strcpy(nextSubstr + replacementLength, nextSubstr + searchLength); 
 	}
 }
 
@@ -136,7 +135,9 @@ void ReplaceIllegalCombinations(char * expr)
 {
 	for (int comboIndex = 0; comboIndex < NumberOfIllegalCombinations; comboIndex++)
 	{
-		ReplaceAll(expr, IllegalCombinations[comboIndex]);	
+		const char * illegalExpr = IllegalCombinations[comboIndex];
+		const char * replacement = GetIllegalCombinationReplacement(illegalExpr);
+		ReplaceAll(expr, illegalExpr, replacement);	
 	}
 }
 
